@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Build JAR
+          command: |
+            ./mvnw package
+      - run:
+          name: Build Docker Image from Dockerfile
+          command: |
+            docker build -t $DOCKER_USER/finalproj-vendor:v1 .
+      - run:
+          name: Log into dockerhub
+          command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+      - run:
+          name: Push docker image to repository
+          command: |
+            docker push $DOCKER_USER/finalproj-vendor:v1
