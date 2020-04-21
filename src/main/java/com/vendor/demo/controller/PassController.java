@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.*;
 
+@CrossOrigin("*")
 @Controller
 @RequestMapping(path = "/v1")
 public class PassController {
@@ -174,6 +175,8 @@ public class PassController {
         } else
             return new ResponseEntity<>("Pass does not exist", HttpStatus.NOT_FOUND);
     }
+
+
 
     @GetMapping("/mypass")
     public ResponseEntity<Object> createCustomer(@RequestHeader String customer_id) {
